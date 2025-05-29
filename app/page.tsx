@@ -7,6 +7,7 @@ import AddTask from "./AddTask";
 export default function Home() {
   const tasks = useQuery(api.tasks.get);
   const setCompleted = useMutation(api.tasks.setCompleted);
+  const removeTask = useMutation(api.tasks.remove);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-24">
@@ -29,6 +30,12 @@ export default function Home() {
                 disabled={isCompleted}
               >
                 {isCompleted ? "Completada" : "Marcar como completada"}
+              </button>
+              <button
+                onClick={() => removeTask({ taskId: _id })}
+                style={{ color: "red" }}
+              >
+                Eliminar
               </button>
             </div>
           ))

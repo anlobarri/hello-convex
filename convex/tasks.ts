@@ -17,9 +17,17 @@ export const create = mutation({
     },
   });
 
+export const remove = mutation({
+    args: { taskId: v.id("tasks") },
+    handler: async (ctx, args) => {
+      await ctx.db.delete(args.taskId);
+    },
+  });
+
 export const setCompleted = mutation({
     args: { taskId: v.id("tasks"), isCompleted: v.boolean() },
     handler: async (ctx, args) => {
         await ctx.db.patch(args.taskId, { isCompleted: args.isCompleted });
     },
 });
+
